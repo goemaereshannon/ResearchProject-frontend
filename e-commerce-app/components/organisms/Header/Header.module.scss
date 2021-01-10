@@ -13,6 +13,16 @@
   margin-left: 1.5rem;
 }
 
+.extra {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .extra {
+    display: block;
+  }
+}
+
 .icons {
   display: flex;
   list-style: none;
