@@ -1,0 +1,23 @@
+.main {
+  margin-top: 0;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--mint-green);
+  padding: 3rem 1.5rem;
+}
+
+.icon {
+  margin-left: 1.5rem;
+}
+
+.icons {
+  display: flex;
+  list-style: none;
+}
+
+.logo {
+  height: 4rem;
+}

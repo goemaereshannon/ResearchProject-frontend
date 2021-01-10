@@ -1,0 +1,15 @@
+.input {
+  margin: 0 1.5rem;
+  position: relative;
+  margin-top: -1.75rem;
+}
+
+.input:focus {
+  border: 1px solid var(--white);
+}
+
+.icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 0.75rem;
+}

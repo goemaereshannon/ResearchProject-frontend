@@ -1,0 +1,24 @@
+//Fonts
+$base-font: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+$second-font: 'American Typewriter';
+
+:root {
+  //colors
+  --khaki: #766c38;
+  --light-khaki: #c4b357;
+  --sea-green: #3e7477;
+  --mint-green: #dde5e5;
+  --dark: #1c1c1c;
+  --xxx-light-grey: #f3f3f3;
+  --white: #fff;
+  --black: #000;
+}
+
+$bp-mobile-sm: 320px;
+$bp-mobile-md: 375px;
+$bp-mobile-lg: 414px;
+$bp-tablet-sm: 562px;
+$bp-tablet-md: 768px;
+$bp-desktop-sm: 1120px;
+$bp-desktop-md: 1280px;
+$bp-desktop-lg: 1536px;
