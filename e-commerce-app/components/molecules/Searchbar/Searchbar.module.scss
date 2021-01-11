@@ -1,0 +1,28 @@
+.input {
+  margin: 0 auto;
+  position: relative;
+  margin-top: -1.75rem;
+  max-width: 17rem;
+}
+
+.input:focus {
+  border: 1px solid var(--white);
+}
+
+.icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 0.75rem;
+}
+
+@media screen and (min-width: 768px) {
+  .input {
+    margin-top: -5.2rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .input {
+    max-width: 32.125rem;
+  }
+}

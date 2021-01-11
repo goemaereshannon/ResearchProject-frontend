@@ -1,0 +1,47 @@
+.main {
+  margin-top: 0;
+}
+
+.top {
+  display: flex;
+  max-height: 8.5rem;
+  justify-content: space-between;
+  background-color: var(--mint-green);
+  padding: 3rem 1.5rem;
+}
+
+.icon {
+  margin-left: 1.5rem;
+}
+
+.extra {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .extra {
+    display: block;
+  }
+}
+
+.icons {
+  display: flex;
+  list-style: none;
+}
+
+.logo {
+  height: 4rem;
+  &__big {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .logo {
+    display: none;
+    &__big {
+      height: 10.5rem;
+      display: block;
+    }
+  }
+}
