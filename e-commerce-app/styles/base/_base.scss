@@ -25,6 +25,16 @@ a {
   height: 2rem;
   margin-left: 1.5rem;
   fill: var(--sea-green);
+  &:hover {
+    color: black;
+    fill: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & .activity-dot {
+      display: block;
+    }
+  }
 }
 
 input[type='text'] {
@@ -35,4 +45,19 @@ input[type='text'] {
   border-radius: 1rem;
   box-shadow: 0px 3px 6px #0000000f;
   padding: 0 1.5rem;
+}
+
+.is-active {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.is-active .activity-dot {
+  display: block;
+}
+
+.activity-dot {
+  display: none;
 }

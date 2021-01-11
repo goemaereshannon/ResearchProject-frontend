@@ -4,6 +4,7 @@
 
 .top {
   display: flex;
+  max-height: 8.5rem;
   justify-content: space-between;
   background-color: var(--mint-green);
   padding: 3rem 1.5rem;
@@ -30,4 +31,17 @@
 
 .logo {
   height: 4rem;
+  &__big {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .logo {
+    display: none;
+    &__big {
+      height: 10.5rem;
+      display: block;
+    }
+  }
 }
