@@ -1,0 +1,38 @@
+.c-discover {
+  margin: 2rem;
+  &-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &-col {
+      flex-grow: 1;
+      padding: 4px;
+      &:hover &-img {
+        opacity: 0.6;
+      }
+    }
+    &-col &-img {
+      padding: 4px;
+      max-height: 100%;
+      min-width: 100%;
+      object-fit: cover;
+      vertical-align: bottom;
+    }
+  }
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
