@@ -8,7 +8,7 @@ import ActiveLink from '../../atoms/ActiveLink/index.js';
 
 import styles from './Navigation.module.scss';
 
-export default function Navigation({ variation = 'primary', size = 'm', children }) {
+export default function Navigation() {
   const [sliderRef] = useKeenSlider({
     initial: 0,
     slidesPerView: 3,

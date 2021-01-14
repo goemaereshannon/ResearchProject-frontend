@@ -10,8 +10,8 @@ export default function Header({ children, activeClassName, ...props }) {
   return (
     <header className={styles.main}>
       <div className={styles.top}>
-        <img className={styles.logo} src="logo/logo_small.png" alt="Minimal logo V with flowers" href="/" />
-        <img className={styles.logo__big} src="logo/logo_large.png" alt="Extensive logo with full name and eyes" href="/" />
+        <img className={styles.logo} src="/logo/logo_small.png" alt="Minimal logo V with flowers" href="/" />
+        <img className={styles.logo__big} src="/logo/logo_large.png" alt="Extensive logo with full name and eyes" href="/" />
         <ul className={styles.icons}>
           <li className={styles.extra}>
             <ActiveLink href="/profile/favorites" activeClassName="is-active">
@@ -50,7 +50,7 @@ export default function Header({ children, activeClassName, ...props }) {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink href="/profile/profile" activeClassName="is-active">
+            <ActiveLink href="/profile/account" activeClassName="is-active">
               <svg viewBox="-42 0 512 512.001" xmlns="http://www.w3.org/2000/svg">
                 <path
                   stroke="#DDE5E5"

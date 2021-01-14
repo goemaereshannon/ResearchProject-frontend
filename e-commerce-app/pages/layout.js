@@ -1,10 +1,10 @@
 import Header from '../components/organisms/Header';
 
-function Layout({ Component, pageProps }) {
+function Layout({ props }) {
+  console.log(props)
   return (
     <>
       <Header />
-      <Component {...pageProps} />
     </>
   );
 }

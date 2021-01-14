@@ -1,18 +1,19 @@
 import Head from 'next/head';
 import React from 'react';
 import { testData } from '../public/test/testProducts';
-import Instagram from 'instagram-web-api';
-import Layout from './layout';
+// import Instagram from 'instagram-web-api';
+import Header from '../components/organisms/Header';
 
 function Discover({ eightImgs, posts }) {
   const col1 = eightImgs.slice(0, 2);
   const col2 = eightImgs.slice(2, 4);
   const col3 = eightImgs.slice(4, 6);
   const col4 = eightImgs.slice(6, 8);
-  posts = posts.slice(0, 4);
+  // posts = posts.slice(0, 4);
   console.log({ col1 });
   return (
-    <Layout>
+    <>
+      <Header/>
       <Head>
         <title>ByViChi shop</title>
         <link rel="icon" href="/favicon.ico" />
@@ -64,33 +65,23 @@ function Discover({ eightImgs, posts }) {
         <p className="c-discover-more">
           <a>Toon meer</a>
         </p>
-        <div className="c-discover-insta">
-          {posts.map(({ node }, i) => {
-            return (
-              <div key={i}>
-                <img src={node.display_resources[0].src} className="c-discover-insta-photo" />
-                {/* <p>{node.edge_media_to_caption.edges[0]?.node.text}</p> */}
-              </div>
-            );
-          })}
-        </div>
       </main>
-    </Layout>
+    </>
   );
 }
 
 export async function getStaticProps() {
-  const client = new Instagram({ username: 'shannongoemaere', password: process.env.INSTA_PASSWORD });
-  await client.login();
+  // const client = new Instagram({ username: 'shannongoemaere', password: process.env.INSTA_PASSWORD });
+  // await client.login();
 
-  const response = await client.getPhotosByUsername({
-    username: 'shannongoemaere',
-  });
+  // const response = await client.getPhotosByUsername({
+  //   username: 'shannongoemaere',
+  // });
   const eightImgs = testData;
   return {
     props: {
       eightImgs,
-      posts: response.user.edge_owner_to_timeline_media.edges,
+      // posts: response.user.edge_owner_to_timeline_media.edges,
     },
   };
 }
