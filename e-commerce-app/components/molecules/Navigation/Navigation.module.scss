@@ -1,6 +1,4 @@
 .nav {
-  display: flex;
-  justify-content: center;
   margin-top: 1.5rem;
   padding: 0;
   &__large {
@@ -8,7 +6,10 @@
   }
   &__item {
     color: var(--sea-green);
-
+  }
+  &__small {
+    display: flex;
+    justify-content: center;
   }
 }
 
@@ -19,7 +20,8 @@
     }
 
     &__large {
-      display: block;
+      display: flex;
+      justify-content: center;
     }
   }
 }
