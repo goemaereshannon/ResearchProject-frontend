@@ -18,6 +18,9 @@ export default function ToggleButton({ title, titleTwo, pathOne, pathTwo }) {
     if (p == titleTwo) {
       setTitleClass('unclickedSide');
       setTitleTwoClass('clickedSide');
+      setTimeout(function () {
+        router.push(pathTwo);
+      }, 300);
     }
   };
   return (
