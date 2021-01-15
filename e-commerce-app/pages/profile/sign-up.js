@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import Link from 'next/link';
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -76,12 +77,12 @@ export default function SignUp() {
   return (
     <div className="mint-bg">
       <header className="c-head">
-        <a href="/profile/account">
+        <Link href="/profile/account">
           <img src="/svgs/arrow.svg" alt="Back arrow" />
-        </a>
-        <a href="/" className="c-logo-V">
+        </Link>
+        <Link href="/" className="c-logo-V">
           <img className="c-logo-V" src="/logo/logo_small.png" alt="Minimal logo V with flowers" />
-        </a>
+        </Link>
       </header>
       <main className={page}>
         <p className="c-discover-title c-title">Registreren</p>
@@ -127,7 +128,10 @@ export default function SignUp() {
             />
           </div>
           <p className="c-redirect">
-            Heeft u al een account? <a className="c-redirect-link">Log in</a>
+            Heeft u al een account?{' '}
+            <Link href="/profile/log-in">
+              <span className="c-redirect-link">Log in</span>
+            </Link>
           </p>
           <input value="Registreer" type="button" onClick={submitForm} className="c-button" />;
         </form>

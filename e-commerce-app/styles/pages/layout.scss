@@ -24,6 +24,12 @@
   }
 }
 
+@media screen and (min-width: 425px) {
+  .c-content {
+    margin-top: 6rem;
+  }
+}
+
 .c-one {
   display: none;
 }
@@ -92,6 +98,7 @@
 
 .c-head {
   padding: 2.5rem 2rem;
+  padding-bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -107,6 +114,7 @@
 
 .c-title {
   font-size: 1.5rem;
+  padding-bottom: 2rem;
 }
 
 .c-button {
