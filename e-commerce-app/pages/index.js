@@ -5,12 +5,13 @@ import { testData } from '../public/test/testProducts';
 import Header from '../components/organisms/Header';
 import Router from 'next/router';
 
-export default function Discover({ eightImgs, posts }) {
+export default function Discover({ eightImgs, posts, products }) {
+  console.log(products)
   const getDetail = (id) => {
     const path = `/products/${id}`;
     Router.push(path);
   };
-  const col1 = eightImgs.slice(0, 2);
+  const col1 = products.slice(0, 2);
   const col2 = eightImgs.slice(2, 4);
   const col3 = eightImgs.slice(4, 6);
   const col4 = eightImgs.slice(6, 8);
@@ -85,11 +86,28 @@ export async function getStaticProps() {
   // const response = await client.getPhotosByUsername({
   //   username: 'shannongoemaere',
   // });
+  const baseURL = process.env.BASE_URL_PROD; 
+  let products; 
+
+  try {
+    const res= await fetch(`${baseURL}products`);
+    products = await res.json();
+  } catch (error) {
+    console.log(error); 
+  }
+    
+
+   
+
+  // const res = await fetch(`https://.../data`)
+  // const data = await res.json()
+
   const eightImgs = testData;
   return {
     props: {
       eightImgs,
       // posts: response.user.edge_owner_to_timeline_media.edges,
+      products, 
     },
   };
 }
