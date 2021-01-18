@@ -3,8 +3,13 @@ import React from 'react';
 import { testData } from '../public/test/testProducts';
 // import Instagram from 'instagram-web-api';
 import Header from '../components/organisms/Header';
+import Router from 'next/router';
 
-function Discover({ eightImgs, posts }) {
+export default function Discover({ eightImgs, posts }) {
+  const getDetail = (id) => {
+    const path = `/products/${id}`;
+    Router.push(path);
+  };
   const col1 = eightImgs.slice(0, 2);
   const col2 = eightImgs.slice(2, 4);
   const col3 = eightImgs.slice(4, 6);
@@ -13,7 +18,7 @@ function Discover({ eightImgs, posts }) {
   console.log({ col1 });
   return (
     <>
-      <Header/>
+      <Header />
       <Head>
         <title>ByViChi shop</title>
         <link rel="icon" href="/favicon.ico" />
@@ -23,6 +28,9 @@ function Discover({ eightImgs, posts }) {
           <div className="c-discover-photos-col">
             {col1.map((product) => (
               <div
+                onClick={() => {
+                  productDetail(product.id);
+                }}
                 key={product.id}
                 onClick={() => {
                   getDetail(product.id);
@@ -85,5 +93,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-export default Discover;

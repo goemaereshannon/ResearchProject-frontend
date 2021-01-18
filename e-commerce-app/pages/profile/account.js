@@ -1,17 +1,13 @@
-import Link from 'next/link';
 import Head from 'next/head';
 
 import Header from '../../components/organisms/Header';
 import ToggleButton from '../../components/atoms/ToggleButton';
 
 function Account() {
-  const click = (title) => {
-    console.log({ title } + 'geklikt');
-  };
   return (
     <>
       <Head>
-        <title>My account - ByViChi</title>
+        <title>Mijn account- ByViChi</title>
       </Head>
       <Header />
       <main className="c-container">
