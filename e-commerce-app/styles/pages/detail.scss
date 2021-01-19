@@ -46,11 +46,19 @@
 		position: absolute;
 		left: 0;
 		right: 0;
+
+		&-lg {
+			display: none;
+			&-subnav {
+				margin-left: 8.75rem;
+				margin-right: 8.75rem;
+				margin-bottom: 2rem;
+			}
+		}
 	}
 
 	&-extra,
 	&-button {
-		margin-left: 2rem;
 		margin-right: 2rem;
 	}
 	&-prop {
@@ -73,6 +81,49 @@
 			&:focus {
 				background-color: var(--dark);
 				color: white;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+@media screen and (min-width: 768px) {
+	.c-detail {
+		margin-left: 7rem;
+		margin-right: 7rem;
+		display: flex;
+		&-catcrumb {
+			color: var(--sea-green);
+			&-cat {
+				opacity: 0.4;
+			}
+		}
+
+		&-head {
+			display: none;
+			&-lg {
+				display: block;
+			}
+		}
+		&-img {
+			width: 19rem;
+			height: auto;
+		}
+
+		&-body {
+			display: flex;
+			flex-direction: column;
+		}
+		&-price {
+			position: relative;
+			display: block;
+			padding-left: 2rem;
+		}
+		&-prop {
+			&-title {
+				padding-top: 2.5rem;
 			}
 		}
 	}
