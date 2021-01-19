@@ -50,6 +50,7 @@ input[type='text'] {
 .is-active {
   color: black;
   display: flex;
+  fill: black;
   flex-direction: column;
   align-items: center;
 }
@@ -60,4 +61,17 @@ input[type='text'] {
 
 .activity-dot {
   display: none;
+}
+
+::placeholder {
+  color: var(--sea-green);
+  opacity: 0.6;
+}
+
+:-ms-input-placeholder {
+  color: var(--sea-green);
+}
+
+::-ms-input-placeholder {
+  color: var(--sea-green);
 }

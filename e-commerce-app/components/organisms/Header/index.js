@@ -10,12 +10,16 @@ export default function Header({ children, activeClassName, ...props }) {
   return (
     <header className={styles.main}>
       <div className={styles.top}>
-        <img className={styles.logo} src="logo/logo_small.png" alt="Minimal logo V with flowers" href="/" />
-        <img className={styles.logo__big} src="logo/logo_large.png" alt="Extensive logo with full name and eyes" href="/" />
+        <a className={styles.logo} href="/">
+          <img className={styles.logo} src="/logo/logo_small.png" alt="Minimal logo V with flowers" />
+        </a>
+        <a className={styles.logo__big} href="/">
+          <img className={styles.logo__big} src="/logo/logo_large.png" alt="Extensive logo with full name and eyes" />
+        </a>
         <ul className={styles.icons}>
           <li className={styles.extra}>
             <ActiveLink href="/profile/favorites" activeClassName="is-active">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="navigationIcon">
                 <path
                   d="M474.644,74.27C449.391,45.616,414.358,29.836,376,29.836c-53.948,0-88.103,32.22-107.255,59.25
 			c-4.969,7.014-9.196,14.047-12.745,20.665c-3.549-6.618-7.775-13.651-12.745-20.665c-19.152-27.03-53.307-59.25-107.255-59.25
@@ -34,7 +38,7 @@ export default function Header({ children, activeClassName, ...props }) {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink href="/orders/cart" activeClassName="is-active">
+            <ActiveLink href="/orders/cart" activeClassName="is-active" className="navigationIcon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 321.2 321.2">
                 <path
                   d="M306.4,313.2l-24-223.6c-0.4-3.6-3.6-6.4-7.2-6.4h-44.4V69.6c0-38.4-31.2-69.6-69.6-69.6c-38.4,0-69.6,31.2-69.6,69.6
@@ -50,7 +54,7 @@ export default function Header({ children, activeClassName, ...props }) {
             </ActiveLink>
           </li>
           <li>
-            <ActiveLink href="/profile/profile" activeClassName="is-active">
+            <ActiveLink href="/profile/account" activeClassName="is-active" className="navigationIcon">
               <svg viewBox="-42 0 512 512.001" xmlns="http://www.w3.org/2000/svg">
                 <path
                   stroke="#DDE5E5"

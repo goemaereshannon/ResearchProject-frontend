@@ -8,9 +8,9 @@ import ActiveLink from '../../atoms/ActiveLink/index.js';
 
 import styles from './Navigation.module.scss';
 
-export default function Navigation({ variation = 'primary', size = 'm', children }) {
+export default function Navigation() {
   const [sliderRef] = useKeenSlider({
-    initial: 3.5,
+    initial: 0,
     slidesPerView: 3,
     mode: 'free',
     loop: true,
@@ -60,7 +60,7 @@ export default function Navigation({ variation = 'primary', size = 'm', children
           </ActiveLink>
         </li>
       </ul>
-      <ul className={(styles.nav__large, styles.nav + ' c-nav-items')}>
+      <ul className={styles.nav__large + ' c-nav-items ' + styles.nav}>
         <li className={styles.nav__item}>
           <ActiveLink href="/" activeClassName="is-active">
             <p>

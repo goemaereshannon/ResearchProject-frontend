@@ -1,0 +1,28 @@
+.toggleInput {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.buttonBox {
+  display: flex;
+  background-color: var(--xxx-light-grey);
+  border-radius: 1rem;
+  max-width: 28rem;
+  max-height: 3.25rem;
+  width: 100%;
+}
+
+.title {
+  padding: 0 0.75rem;
+}
+
+.label {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  margin-top: 0.1rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
