@@ -1,11 +1,17 @@
-import '../styles/screen.scss';
+import "../styles/screen.scss";
+import React, { useState } from "react";
+import { Context } from "../libs/context.js";
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <Component {...pageProps} />
-    </>
-  );
+	const [context, setContext] = useState("user");
+	console.log(context);
+	return (
+		<>
+			<Context.Provider value={[context, setContext]}>
+				<Component {...pageProps} />
+			</Context.Provider>
+		</>
+	);
 }
 
 export default MyApp;

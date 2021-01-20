@@ -121,7 +121,7 @@ export async function getStaticPaths() {
 	let products;
 	let paths;
 	try {
-		const res = await fetch(`${baseURL}products`);
+		const res = await fetch("http://localhost:63875/api/products");
 		products = await res.json();
 
 		paths = products.map((prod) => ({
@@ -140,7 +140,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	let product;
 	try {
-		const res = await fetch(`${baseURL}products/${params.id}`);
+		const res = await fetch(`http://localhost:63875/api/products/${params.id}`);
 		product = await res.json();
 	} catch (error) {
 		console.log(error);
