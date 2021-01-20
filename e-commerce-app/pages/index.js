@@ -9,6 +9,8 @@ import Router from "next/router";
 export default function Discover({ eightImgs, posts, products }) {
 	const [context, setContext] = useContext(Context);
 	console.log(context);
+	setContext("KAAS");
+	console.log(context);
 	console.log(products);
 	let col1;
 	const getDetail = (id) => {

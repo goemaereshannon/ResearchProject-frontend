@@ -1,7 +1,13 @@
-import { React, useState } from "react";
+import React, { useState, useContext } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import { Context } from "../../libs/context.js";
+
 export default function SignUp() {
+	const [context, setContext] = useContext(Context);
+	const router = useRouter();
+
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -24,6 +30,30 @@ export default function SignUp() {
 		password: "",
 	};
 
+	const userLogin = (user) => {
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(user),
+		};
+		fetch("http://localhost:63980/api/auth/login", requestOptions)
+			.then(async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					console.log(data);
+					setContext(data);
+					router.push("/profile/overview");
+					console.log(context);
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
+
 	const registerUser = (user) => {
 		console.log("Registreer user");
 		console.log(JSON.stringify(user));
@@ -35,11 +65,17 @@ export default function SignUp() {
 		fetch("http://localhost:63980/api/auth/register", requestOptions)
 			.then(async (response) => {
 				const data = await response.json();
+				console.log("DATA");
+				console.log(data);
 				if (!response.ok) {
 					const error = (data && data.message) || response.status;
 					return Promise.reject(error);
 				} else {
-					console.log(data);
+					const loginUser = {
+						email: user.email,
+						password: user.password,
+					};
+					userLogin(loginUser);
 				}
 			})
 			.catch((error) => {
@@ -135,7 +171,6 @@ export default function SignUp() {
 								placeholder="john.doe@domain.be"
 								value={email}
 								onChange={(e) => {
-									console.log(e.target.value);
 									setEmail(e.target.value);
 								}}
 							/>

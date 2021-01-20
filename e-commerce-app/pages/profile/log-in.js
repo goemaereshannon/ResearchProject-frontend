@@ -1,7 +1,13 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { Context } from "../../libs/context.js";
+
 export default function LogIn() {
+	const [context, setContext] = useContext(Context);
+	const router = useRouter();
+
 	const loginUser = (user) => {
 		const requestOptions = {
 			method: "POST",
@@ -16,6 +22,8 @@ export default function LogIn() {
 					return Promise.reject(error);
 				} else {
 					console.log(data);
+					setContext(data);
+					router.push("/profile/overview");
 				}
 			})
 			.catch((error) => {

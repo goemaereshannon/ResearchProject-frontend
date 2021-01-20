@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Context } from "../libs/context.js";
 
 function MyApp({ Component, pageProps }) {
-	const [context, setContext] = useState("user");
+	const [context, setContext] = useState("");
 	console.log(context);
 	return (
 		<>
