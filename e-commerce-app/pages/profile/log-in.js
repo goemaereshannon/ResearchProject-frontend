@@ -1,7 +1,11 @@
 import { React, useState, useContext } from "react";
+
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
+
+import Cookies from "js-cookie";
+
 import { Context } from "../../libs/context.js";
 
 export default function LogIn() {
@@ -24,6 +28,8 @@ export default function LogIn() {
 					console.log(data);
 					setContext(data);
 					localStorage.setItem("token", JSON.stringify(data));
+					Cookies.set("token", data.token);
+					process.env.JWT_KEY = data.token;
 					router.push("/profile/account");
 				}
 			})
@@ -86,7 +92,6 @@ export default function LogIn() {
 								placeholder="john.doe@domain.be"
 								value={email}
 								onChange={(e) => {
-									console.log(e.target.value);
 									setEmail(e.target.value);
 								}}
 							/>

@@ -10,6 +10,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "instagram-web-api": "^2.2.2",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
     "keen-slider": "^5.3.5",
     "next": "10.0.4",
     "prop-types": "^15.7.2",

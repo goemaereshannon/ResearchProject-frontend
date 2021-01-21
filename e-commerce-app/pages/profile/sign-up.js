@@ -1,7 +1,11 @@
 import React, { useState, useContext } from "react";
+
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
+import Cookies from "js-cookie";
+
 import { Context } from "../../libs/context.js";
 
 export default function SignUp() {
@@ -46,6 +50,8 @@ export default function SignUp() {
 					console.log(data);
 					setContext(data);
 					localStorage.setItem("token", JSON.stringify(data));
+					Cookies.set("token", data.token);
+					process.env.JWT_KEY = data.token;
 					router.push("/profile/account");
 					console.log(context);
 				}
