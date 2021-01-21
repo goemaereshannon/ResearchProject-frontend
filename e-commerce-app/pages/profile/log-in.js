@@ -23,7 +23,8 @@ export default function LogIn() {
 				} else {
 					console.log(data);
 					setContext(data);
-					router.push("/profile/overview");
+					localStorage.setItem("token", JSON.stringify(data));
+					router.push("/profile/account");
 				}
 			})
 			.catch((error) => {
