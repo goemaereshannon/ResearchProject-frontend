@@ -5,34 +5,66 @@ import Router from "next/router";
 import jwt from "jsonwebtoken";
 
 import Header from "../../components/organisms/Header";
-import { getAppCookies, verifyToken } from "../../libs/middlewareUtils";
 
-function Cart({ products }) {
-	console.log(products);
+export default function Cart({ products, cart }) {
 	const getDetail = (id) => {
 		const path = `/products/${id}`;
 		Router.push(path);
+	};
+	const order = () => {
+		console.log("Men wil bestellen");
 	};
 	if (products != null && products.length != 0) {
 		console.log(products);
 		return (
 			<>
 				<Header />
-				<main className="c-detail">
+				<main className="c-detail c-prodlist">
 					<h1>Winkelmandje</h1>
-					<div>
+					<div className="c-prodlist-body">
 						{products.map((product) => (
 							<div
-								key={product.id}
+								className="c-prodlist-item"
+								key={product.creationDate}
 								onClick={() => {
 									getDetail(product.id);
 								}}
 							>
-								<img src={product.imageUrl} alt={product.name} />
-								<p>{product.name}</p>
-								<p>{product.price.value}</p>
+								<img
+									className="c-prodlist-img"
+									src={product.imageUrl}
+									alt={product.name}
+								/>
+								<div className="c-prodlist-info">
+									<p>{product.name}</p>
+									<p>€ {product.price.value}</p>
+								</div>
 							</div>
 						))}
+						<div className="c-prodlist-sum">
+							<div className="c-prodlist-sum-row">
+								<p>Totaal artikelen</p>
+								<p>{cart.totalPrice}</p>
+							</div>
+
+							<div className="c-prodlist-sum-row">
+								<p>Verzendkosten</p>
+								<p>GRATIS</p>
+							</div>
+
+							<div className="c-prodlist-sum-row">
+								<b>Totaal</b>
+								<b>{cart.totalPrice}</b>
+							</div>
+						</div>
+					</div>
+					<div className="c-prodlist-btn">
+						<input
+							value="Bestellen"
+							type="button"
+							onClick={order}
+							className="c-button"
+						/>
 					</div>
 				</main>
 			</>
@@ -55,44 +87,7 @@ function Cart({ products }) {
 
 export async function getStaticProps() {
 	let products;
-	const getCartItems = (data) => {
-		console.log(data);
-		fetch(`http://localhost:63875/api/cartitems/${data}`)
-			.then(async (response) => {
-				const data = await response.json();
-				if (!response.ok) {
-					const error = (data && data.message) || response.status;
-					return Promise.reject(error);
-				} else {
-					console.log(data);
-					return data;
-				}
-			})
-			.catch((error) => {
-				console.error("There was an error!", error);
-				return null;
-			});
-	};
-	const checkAuthentication = (token, email) => {
-		console.log(email);
-		console.log(token);
-		fetch(
-			`http://localhost:63980/api/auth/validate?email=${email}&token=${token}`
-		)
-			.then(async (response) => {
-				const data = await response.json();
-				if (!response.ok) {
-					const error = (data && data.message) || response.status;
-					return null;
-				} else {
-					return data;
-				}
-			})
-			.catch((error) => {
-				console.error("There was an error!", error);
-				return null;
-			});
-	};
+	let cart;
 	const token = process.env.JWT_KEY;
 	const decoded = jwt.decode(token);
 	try {
@@ -100,6 +95,10 @@ export async function getStaticProps() {
 			`http://localhost:63875/api/cartitems/${decoded.thisUserId}`
 		);
 		products = await res.json();
+		const resC = await fetch(
+			`http://localhost:63875/api/cart/${decoded.thisUserId}`
+		);
+		cart = await resC.json();
 	} catch (error) {
 		console.log(error);
 		products = null;
@@ -107,39 +106,7 @@ export async function getStaticProps() {
 	return {
 		props: {
 			products,
+			cart,
 		},
 	};
 }
-
-// export async function getServerSideProps(context) {
-// 	let products;
-// 	let decoded;
-// 	console.log("Server side props");
-// 	const { req } = context;
-
-// 	const { token } = getAppCookies(req);
-
-// 	if (token) {
-// 		decoded = jwt.decode(token);
-// 		const userId = decoded.thisUserId;
-// 		// const base64Url = token.split(".")[1];
-// 		// console.log("ER IS EEN BASE");
-// 		// console.log(base64Url);
-// 		// const base64 = base64Url.replace("-", "+").replace("_", "/");
-// 		// console.log(JSON.parse(window.atob(base64)));
-// 		// const email = JSON.parse(window.atob(base64)).sub;
-// 		// checkAuthentication(token, email);
-// 		products = null;
-// 	} else {
-// 		products = null;
-// 	}
-// 	console.log("PRDDDD");
-// 	console.log(products);
-// 	return {
-// 		props: {
-// 			products,
-// 		},
-// 	};
-// }
-
-export default Cart;

@@ -1,0 +1,33 @@
+.c-prodlist {
+	flex-direction: column;
+	&-img {
+		height: 5rem;
+		width: 4.5rem;
+		border-radius: 0.75rem;
+		object-fit: cover;
+	}
+	&-item {
+		display: flex;
+		margin-bottom: 1.25rem;
+	}
+	&-info {
+		margin-left: 1.5rem;
+	}
+	&-sum {
+		background-color: var(--xxx-light-grey);
+		padding: 1rem 2rem;
+		&-row {
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+	&-btn {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+.c-prodlist-btn > .c-button {
+	width: 100%;
+}
