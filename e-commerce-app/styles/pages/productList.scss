@@ -18,9 +18,14 @@
 	&-sum {
 		background-color: var(--xxx-light-grey);
 		padding: 1rem 2rem;
+		margin-bottom: 1rem;
+		
 		&-row {
 			display: flex;
 			justify-content: space-between;
+		}
+		&-cap{
+			text-transform: capitalize;
 		}
 	}
 	&-btn {

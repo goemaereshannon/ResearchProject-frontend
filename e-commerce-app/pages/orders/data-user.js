@@ -7,12 +7,11 @@ import Header from "../../components/organisms/Header";
 import jwt from "jsonwebtoken";
 
 export default function DataUser({ user }) {
-	console.log(user);
 	const changed = () => {
 		//update user info
 	};
-	const goToPayment = () => {
-		Router.push("/orders/payment");
+	const goToConfirmation = () => {
+		Router.push("/orders/confirmation");
 	};
 	return (
 		<>
@@ -20,7 +19,7 @@ export default function DataUser({ user }) {
 			<main className="c-detail c-prodlist">
 				<h1>Bestellen</h1>
 				<div className="c-crumb">
-					Winkelmandje {">"} <b>Gegevens</b> {">"} Betaling {">"} Bevestiging
+					Winkelmandje {">"} <b>Gegevens</b> {">"} Bevestiging {">"} Betaling
 				</div>
 				<div className="c-inputs">
 					<label htmlFor="name">Familienaam</label>
@@ -94,7 +93,7 @@ export default function DataUser({ user }) {
 				</div>
 				<input
 					value="Volgende"
-					onClick={goToPayment}
+					onClick={goToConfirmation}
 					type="button"
 					className="c-button c-detail-button c-order-btn"
 				/>
