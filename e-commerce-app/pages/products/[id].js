@@ -1,16 +1,76 @@
-import { React } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Header from "../../components/organisms/Header";
 import { useRouter } from "next/router";
+import { Context } from "../../libs/context.js";
 
 const baseURL = process.env.BASE_URL_PROD;
 
 export default function Details({ product }) {
+	const [context, setContext] = useContext(Context);
 	const router = useRouter();
 	const id = router.query.id;
 	console.log(id);
 	console.log(product);
+	const postToCart = (userId) => {
+		const cartProduct = {
+			userId: userId,
+			productId: id,
+		};
+		console.log(cartProduct);
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(cartProduct),
+		};
+		fetch("http://localhost:63875/api/cartproduct", requestOptions)
+			.then(async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					console.log(data);
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
+	const checkAuthentication = (token, email) => {
+		console.log(email);
+		console.log(token);
+		fetch(
+			`http://localhost:63980/api/auth/validate?email=${email}&token=${token}`
+		)
+			.then(async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					postToCart(data);
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
+	const addToCart = (prodId) => {
+		console.log(prodId);
+		const usertoken = JSON.parse(context);
+		if (usertoken.token) {
+			const base64Url = usertoken.token.split(".")[1];
+			const base64 = base64Url.replace("-", "+").replace("_", "/");
+			console.log(JSON.parse(window.atob(base64)));
+			const email = JSON.parse(window.atob(base64)).sub;
+			checkAuthentication(usertoken.token, email);
+		} else {
+			router.push("/profile/account");
+		}
+	};
+
 	return (
 		<>
 			<header className="c-detail-head-lg">
@@ -110,6 +170,9 @@ export default function Details({ product }) {
 						value="Voeg toe aan winkelmandje"
 						type="button"
 						className="c-button c-detail-button"
+						onClick={() => {
+							addToCart(product.id);
+						}}
 					/>
 				</div>
 			</main>

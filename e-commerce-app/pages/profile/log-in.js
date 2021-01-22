@@ -1,7 +1,11 @@
 import { React, useState, useContext } from "react";
+
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
+
+import Cookies from "js-cookie";
+
 import { Context } from "../../libs/context.js";
 
 export default function LogIn() {
@@ -23,7 +27,10 @@ export default function LogIn() {
 				} else {
 					console.log(data);
 					setContext(data);
-					router.push("/profile/overview");
+					localStorage.setItem("token", JSON.stringify(data));
+					Cookies.set("token", data.token);
+					console.log(Cookies.get("token"));
+					router.push("/profile/account");
 				}
 			})
 			.catch((error) => {
@@ -85,7 +92,6 @@ export default function LogIn() {
 								placeholder="john.doe@domain.be"
 								value={email}
 								onChange={(e) => {
-									console.log(e.target.value);
 									setEmail(e.target.value);
 								}}
 							/>
