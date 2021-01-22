@@ -29,7 +29,7 @@ export default function LogIn() {
 					setContext(data);
 					localStorage.setItem("token", JSON.stringify(data));
 					Cookies.set("token", data.token);
-					process.env.JWT_KEY = data.token;
+					console.log(Cookies.get("token"));
 					router.push("/profile/account");
 				}
 			})

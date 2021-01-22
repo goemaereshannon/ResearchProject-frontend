@@ -4,9 +4,67 @@ import Header from "../../components/organisms/Header";
 
 import jwt from "jsonwebtoken";
 import { useRouter } from "next/router";
+import cookies from "next-cookies";
 
-export default function Confirmation({ products, cart, user }) {
-	const goToPayment = () => {};
+export default function Confirmation({ products, cart, user, decoded }) {
+	const deleteItemsInCart = () => {
+		const requestOptions = {
+			method: "DELETE",
+		};
+		fetch(`http://localhost:63875/api/cart/${cart.id}`, requestOptions)
+			.then(async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					console.log(data);
+					Router.push("/orders/cart");
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
+	const postOrder = (productIds) => {
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(productIds),
+		};
+		fetch(
+			`http://localhost:63971/api/order/${decoded.thisUserId}?price=${cart.totalPrice}`,
+			requestOptions
+		)
+			.then(async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					console.log(data);
+					deleteItemsInCart();
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
+	const goToPayment = () => {
+		fetch(`http://localhost:63875/api/cartitemIds/${decoded.thisUserId}`)
+			.then(async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					postOrder(data);
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
 	return (
 		<>
 			<Header />
@@ -75,13 +133,12 @@ export default function Confirmation({ products, cart, user }) {
 	);
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
 	let products;
 	let cart;
 	let user;
 
-	const token = process.env.JWT_KEY;
-	const decoded = jwt.decode(token);
+	const decoded = jwt.decode(cookies(context).token);
 	console.log({ decoded });
 	try {
 		const resU = await fetch(
@@ -107,6 +164,7 @@ export async function getStaticProps() {
 			user,
 			products,
 			cart,
+			decoded,
 		},
 	};
 }

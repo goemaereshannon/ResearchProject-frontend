@@ -6,10 +6,7 @@ import { testData } from "../public/test/testProducts";
 import Header from "../components/organisms/Header";
 import ProductGrid from "../components/organisms/ProductGrid";
 
-
 export default function Discover({ posts, products }) {
-	console.log(products);
-
 	return (
 		<>
 			<Header />
@@ -35,7 +32,6 @@ export async function getStaticProps() {
 	try {
 		const res = await fetch("http://localhost:63875/api/products");
 		products = await res.json();
-		console.log(products);
 	} catch (error) {
 		products = null;
 		console.log(error);

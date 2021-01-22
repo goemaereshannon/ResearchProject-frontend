@@ -3,6 +3,9 @@ import React from "react";
 import Router from "next/router";
 
 import jwt from "jsonwebtoken";
+import { getAppCookies } from "../../libs/middlewareUtils";
+import cookie from "js-cookie";
+import cookies from "next-cookies";
 
 import Header from "../../components/organisms/Header";
 
@@ -86,11 +89,11 @@ export default function Cart({ products, cart }) {
 	}
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps(context) {
 	let products;
 	let cart;
-	const token = process.env.JWT_KEY;
-	const decoded = jwt.decode(token);
+	const decoded = jwt.decode(cookies(context).token);
+	console.log({ decoded });
 	try {
 		const res = await fetch(
 			`http://localhost:63875/api/cartitems/${decoded.thisUserId}`

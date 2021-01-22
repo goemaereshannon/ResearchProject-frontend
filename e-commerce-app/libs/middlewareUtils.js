@@ -31,15 +31,16 @@ export function getAppCookies(req) {
 	const parsedItems = {};
 	if (req.headers.cookie) {
 		const cookiesItems = req.headers.cookie.split("; ");
-		console.log("PI");
+
 		cookiesItems.forEach((cookies) => {
 			const parsedItem = cookies.split("=");
-			console.log((parsedItems[parsedItem[0]] = decodeURI(parsedItem[1])));
+			console.log({ parsedItem });
 			parsedItems[parsedItem[0]] = decodeURI(parsedItem[1]);
 		});
 	}
-
-	return parsedItems;
+	console.log(parsedItems.token);
+	console.log(jwt.decode(parsedItems.token));
+	return parsedItems.token;
 }
 
 /*

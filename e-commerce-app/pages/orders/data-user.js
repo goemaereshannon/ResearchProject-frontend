@@ -1,6 +1,7 @@
 import React from "react";
 
 import Router from "next/router";
+import cookies from "next-cookies";
 
 import Header from "../../components/organisms/Header";
 
@@ -102,11 +103,10 @@ export default function DataUser({ user }) {
 	);
 }
 
-export async function getStaticProps() {
-	let user = null;
+export async function getServerSideProps(context) {
+	let user;
 
-	const token = process.env.JWT_KEY;
-	const decoded = jwt.decode(token);
+	const decoded = jwt.decode(cookies(context).token);
 	try {
 		const res = await fetch(
 			`http://localhost:63980/api/auth/${decoded.thisUserId}`

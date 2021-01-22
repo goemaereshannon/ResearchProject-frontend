@@ -1,6 +1,5 @@
 import Router from "next/router";
 export default function ProductGrid({ products }) {
-	console.log(products.length);
 	const getDetail = (id) => {
 		const path = `/products/${id}`;
 		Router.push(path);
@@ -20,9 +19,8 @@ export default function ProductGrid({ products }) {
 	} else if (dividedBy4 < 1) {
 		//er zijn minder dan 4 producten
 		if (products.length == 1) {
-			console.log("IK BEN ALLEEN");
 			col1 = products.slice(0, 1);
-			console.log(col1);
+
 			return (
 				<main className="c-discover">
 					<div className="c-discover-photos">
@@ -48,11 +46,8 @@ export default function ProductGrid({ products }) {
 			);
 		}
 		if (products.length == 2) {
-			console.log("WE ZIJN MET 2");
 			col1 = products.slice(0, 1);
 			col2 = products.slice(1, 2);
-			console.log(col1);
-			console.log(col2);
 			return (
 				<main className="c-discover">
 					<div className="c-discover-photos">
@@ -95,11 +90,9 @@ export default function ProductGrid({ products }) {
 			);
 		}
 		if (products.length == 3) {
-			console.log("WE ZIJN MET ZN 3");
 			col1 = products.slice(0, 1);
 			col2 = products.slice(1, 2);
 			col3 = products.slice(2, 3);
-			console.log(col3);
 			return (
 				<main className="c-discover">
 					<div className="c-discover-photos">
@@ -243,32 +236,20 @@ export default function ProductGrid({ products }) {
 		col2 = products.slice(dividedBy4, dividedBy4 * 2);
 		col3 = products.slice(dividedBy4 * 2, dividedBy4 * 3);
 		col4 = products.slice(dividedBy4 * 3, dividedBy4 * 4);
-		console.log(col1);
-		console.log(col2);
-		console.log(col3);
-		console.log(col4);
+
 		let rest = products.length - dividedBy4 * 4;
-		console.log("REST" + rest);
 		let restProd = products.slice(dividedBy4 * 4, dividedBy4 * 4 + rest);
 		if (restProd.length == 1) {
-			console.log("IK BEN ALLEEN");
 			const extraProd = restProd.slice(0, 1)[0];
-			console.log(col1);
 			col1.push(extraProd);
-			console.log(col1);
 		}
 		if (restProd.length == 2) {
-			console.log("WE ZIJN MET 2");
 			const extraProd = restProd.slice(0, 1)[0];
 			col1.push(extraProd);
 			const extraProd2 = restProd.slice(1, 2)[0];
 			col2.push(extraProd2);
-			console.log(col1);
-			console.log(col2);
 		}
 		if (restProd.length == 3) {
-			console.log("WE ZIJN MET ZN 3");
-			console.log(col3);
 			const extraProd = restProd.slice(0, 1)[0];
 			col1.push(extraProd);
 			const extraProd2 = restProd.slice(1, 2)[0];
