@@ -1,12 +1,19 @@
 import React from "react";
 
+import Router from "next/router";
+
 import Header from "../../components/organisms/Header";
 
-export default function DataUser() {
+import jwt from "jsonwebtoken";
+
+export default function DataUser({ user }) {
+	console.log(user);
 	const changed = () => {
 		//update user info
 	};
-	const goToPayment = () => {};
+	const goToPayment = () => {
+		Router.push("/orders/payment");
+	};
 	return (
 		<>
 			<Header />
@@ -21,7 +28,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="name"
 						placeholder="Doe"
-						value=""
+						value={user.lastName}
 						onChange={changed}
 					/>
 				</div>
@@ -31,7 +38,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="firstname"
 						placeholder="John"
-						value=""
+						value={user.firstName}
 						onChange={changed}
 					/>
 				</div>
@@ -41,7 +48,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="email"
 						placeholder="johndoe@domain.com"
-						value=""
+						value={user.email}
 						onChange={changed}
 					/>
 				</div>
@@ -51,7 +58,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="street"
 						placeholder="Ergensstraat"
-						value=""
+						value={user.streetName}
 						onChange={changed}
 					/>
 				</div>
@@ -61,7 +68,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="number"
 						placeholder="101"
-						value=""
+						value={user.houseNumber}
 						onChange={changed}
 					/>
 				</div>
@@ -71,7 +78,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="postCode"
 						placeholder="8500"
-						value=""
+						value={user.postCode}
 						onChange={changed}
 					/>
 				</div>
@@ -81,7 +88,7 @@ export default function DataUser() {
 						className="c-inputs-box"
 						id="city"
 						placeholder="Kortrijk"
-						value=""
+						value={user.city}
 						onChange={changed}
 					/>
 				</div>
@@ -94,4 +101,25 @@ export default function DataUser() {
 			</main>
 		</>
 	);
+}
+
+export async function getStaticProps() {
+	let user = null;
+
+	const token = process.env.JWT_KEY;
+	const decoded = jwt.decode(token);
+	try {
+		const res = await fetch(
+			`http://localhost:63980/api/auth/${decoded.thisUserId}`
+		);
+		user = await res.json();
+	} catch (error) {
+		console.log(error);
+	}
+
+	return {
+		props: {
+			user,
+		},
+	};
 }
