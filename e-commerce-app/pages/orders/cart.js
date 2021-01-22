@@ -13,6 +13,7 @@ export default function Cart({ products, cart }) {
 	};
 	const order = () => {
 		console.log("Men wil bestellen");
+		Router.push("/orders/data-user");
 	};
 	if (products != null && products.length != 0) {
 		console.log(products);
