@@ -8,7 +8,7 @@ export default function ProductGrid({ products }) {
 	let col2;
 	let col3;
 	let col4;
-	const dividedBy4 = parseInt(products.length / 4);
+
 	if (products == null || products.length == 0) {
 		//geen producten of producten niet te vinden
 		return (
@@ -17,6 +17,7 @@ export default function ProductGrid({ products }) {
 			</>
 		);
 	} else if (dividedBy4 < 1) {
+		const dividedBy4 = parseInt(products.length / 4);
 		//er zijn minder dan 4 producten
 		if (products.length == 1) {
 			col1 = products.slice(0, 1);
@@ -232,6 +233,7 @@ export default function ProductGrid({ products }) {
 			);
 		}
 	} else {
+		const dividedBy4 = parseInt(products.length / 4);
 		col1 = products.slice(0, dividedBy4);
 		col2 = products.slice(dividedBy4, dividedBy4 * 2);
 		col3 = products.slice(dividedBy4 * 2, dividedBy4 * 3);

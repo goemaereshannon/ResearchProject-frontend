@@ -36,8 +36,6 @@ export async function getStaticProps() {
 		products = null;
 		console.log(error);
 	}
-	// const [context, setContext] = useContext(Context);
-	// setContext("KAAS");
 
 	// const res = await fetch(`https://.../data`)
 	// const data = await res.json()
