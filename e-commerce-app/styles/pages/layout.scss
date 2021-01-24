@@ -1,147 +1,156 @@
 .c-container {
-  padding: 1.5rem;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+	padding: 1.5rem;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .c-content {
-  height: calc(100% - 10rem); // - hoogte van header
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	height: calc(100% - 10rem); // - hoogte van header
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .c-main {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  max-width: 25rem;
-  width: 100%;
-  background-color: var(--mint-green);
-  & :first-child {
-    margin-top: 0;
-  }
+	padding: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	max-width: 25rem;
+	width: 100%;
+	background-color: var(--mint-green);
+	& :first-child {
+		margin-top: 0;
+	}
 }
 
 @media screen and (min-width: 425px) {
-  .c-content {
-    margin-top: 6rem;
-  }
+	.c-content {
+		margin-top: 6rem;
+	}
 }
 
 .c-one {
-  display: none;
+	display: none;
 }
 
 .c-two {
-  display: none;
+	display: none;
 }
 
 .c-inputs {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-  &-icon {
-    position: absolute;
-    height: 1.5rem;
-    bottom: 0.25rem;
-  }
-  &-line {
-    padding-left: 2.1rem;
-    margin-top: 0.25rem;
-    height: 2rem;
-    background-color: var(--mint-green);
-    box-shadow: none;
-    border: none;
-    border-bottom: 1px solid var(--dark);
-    font-size: 1.25rem;
-    &:hover,
-    &:active,
-    &:focus {
-      border-bottom: 1px solid var(--sea-green);
-    }
-  }
-  &-box {
-    margin-top: 0.25rem;
-    height: 3rem;
-    border-radius: 1rem;
-    background-color: var(--xxx-light-grey);
-    border: none;
-    font-size: 1.125rem;
-    padding: 0 1rem;
-    min-width: 17rem;
-    &-multiple {
-      min-width: auto;
-    }
-    &:hover,
-    &:active,
-    &:focus {
-      box-shadow: 0px 3px 6px rgba(62, 116, 119, 0.15);
-    }
-  }
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin-top: 2rem;
+	&-icon {
+		position: absolute;
+		height: 1.5rem;
+		bottom: 0.25rem;
+	}
+	&-line {
+		padding-left: 2.1rem;
+		margin-top: 0.25rem;
+		height: 2rem;
+		background-color: var(--mint-green);
+		box-shadow: none;
+		border: none;
+		border-bottom: 1px solid var(--dark);
+		font-size: 1.25rem;
+		&:hover,
+		&:active,
+		&:focus {
+			border-bottom: 1px solid var(--sea-green);
+		}
+	}
+	&-box {
+		margin-top: 0.25rem;
+		height: 3rem;
+		border-radius: 1rem;
+		background-color: var(--xxx-light-grey);
+		border: none;
+		font-size: 1.125rem;
+		padding: 0 1rem;
+		min-width: 17rem;
+		&-multiple {
+			min-width: auto;
+		}
+		&:hover,
+		&:active,
+		&:focus {
+			box-shadow: 0px 3px 6px rgba(62, 116, 119, 0.15);
+		}
+	}
 }
 
 .c-redirect {
-  text-align: right;
+	text-align: right;
 
-  &-link {
-    text-decoration: underline;
-  }
+	&-link {
+		text-decoration: underline;
+	}
 }
 
 .c-caption {
-  margin-bottom: 1.5rem;
-  max-width: 28rem;
+	margin-bottom: 1.5rem;
+	max-width: 28rem;
 }
 
 .c-head {
-  padding: 2.5rem 2rem;
-  padding-bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	padding: 2.5rem 2rem;
+	padding-bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .c-img {
-  max-width: 28rem;
+	max-width: 28rem;
 }
 
 .c-logo-V {
-  height: 5rem;
+	height: 5rem;
 }
 
 .c-title {
-  font-size: 1.5rem;
-  padding-bottom: 2rem;
+	font-size: 1.5rem;
+	padding-bottom: 2rem;
 }
 
 .c-button {
-  background-color: var(--sea-green);
-  padding: 1rem;
-  max-width: 19.5rem;
-  color: var(--white);
-  border: none;
-  border-radius: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+	background-color: var(--sea-green);
+	padding: 1rem;
+	max-width: 19.5rem;
+	color: var(--white);
+	border: none;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+	&-second {
+		background-color: var(--light-khaki);
+		width: 100%;
+		border: none;
+		border-radius: 1rem;
+		padding: 0.75rem;
+		color: white;
+		margin-bottom: 2rem;
+	}
 }
 
 @media screen and (min-width: 375px) {
-  .c-button {
-    margin-top: 3.5rem;
-  }
+	.c-button {
+		margin-top: 3.5rem;
+	}
 }
 
 @media screen and (min-width: 768px) {
-  .c-container {
-    padding: 1.5rem 6rem;
-  }
+	.c-container {
+		padding: 1.5rem 6rem;
+	}
 }
 
 .mint-bg {
-  background: var(--mint-green);
-  min-height: 100vh;
-  height: 100%;
+	background: var(--mint-green);
+	min-height: 100vh;
+	height: 100%;
 }

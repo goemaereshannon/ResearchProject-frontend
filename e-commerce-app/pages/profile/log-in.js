@@ -126,7 +126,6 @@ export default function LogIn() {
 							onClick={submitForm}
 							className="c-button"
 						/>
-						;
 					</form>
 				</main>
 			</div>

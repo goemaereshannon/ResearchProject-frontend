@@ -9,43 +9,11 @@ import moment from "moment";
 import Header from "../../components/organisms/Header";
 import ToggleButton from "../../components/atoms/ToggleButton";
 import { Context } from "../../libs/context.js";
+import { setLogout } from "../../libs/middlewareUtils";
 
-export default function Account({ orders, user, role, products }) {
-	function parseJwt(token) {
-		if (!token) {
-			return (
-				<>
-					<Head>
-						<title>Mijn account- ByViChi</title>
-					</Head>
-					<Header />
-					<main className="c-container">
-						<img
-							className="c-img"
-							src="/svgs/undraw_web_shopping_dd4l.svg"
-							alt="Tekening van meisje met dozen en webshop"
-						/>
-						<ToggleButton
-							title="Registreren"
-							titleTwo="Inloggen"
-							pathOne="/profile/sign-up"
-							pathTwo="/profile/log-in"
-						></ToggleButton>
-						<p className="c-caption">
-							Houd uw verlanglijstje bij, volg uw bestellingen op en bestel
-							sneller door eenmalig uw gegevens in te vullen…{" "}
-						</p>
-					</main>
-				</>
-			);
-		}
-		const base64Url = token.split(".")[1];
-		const base64 = base64Url.replace("-", "+").replace("_", "/");
-		return JSON.parse(window.atob(base64));
-	}
+export default function Account({ orders, user, role, products, allOrders }) {
 	const [context, setContext] = useContext(Context);
 	if (context) {
-		parseJwt(context.token);
 		if (role == "Customer" && orders && products) {
 			return (
 				<>
@@ -75,44 +43,84 @@ export default function Account({ orders, user, role, products }) {
 
 							<p className="c-more">Toon alle</p>
 						</div>
-						<input value="Uitloggen" type="button" className="c-button" />
+						<input
+							value="Uitloggen"
+							type="button"
+							className="c-button"
+							onClick={setLogout}
+						/>
 					</main>
 				</>
 			);
-		} else if (role == "Admin") {
+		} else if (role == "Admin" && allOrders) {
 			return (
 				<>
 					<Header />
+					<main className="c-discover">
+						<h1 className="c-prodlist-sum-cap">Beheerder {user.firstName}</h1>
+						<div>
+							<h2>Alle bestellingen</h2>
+							<div className="c-prodlist-sum c-order-sum">
+								<div className="c-order-sum-body">
+									Geplaatst:
+									{moment(allOrders[0].placementDate).format("DD-mm-yyyy")}
+									<br />
+									{allOrders[0].status}
+									<br />
+									Items: {allOrders[0].orderProducts.length}
+									<br />
+									Totaal: €{allOrders[0].totalPrice}
+									<br />
+								</div>
+							</div>
+
+							<p className="c-more">Toon alle</p>
+						</div>
+						<div>
+							<h2>Nieuw artikel toevoegen</h2>
+							<input
+								value="Voeg toe"
+								type="button"
+								className="c-button-second"
+							/>
+						</div>
+						<input
+							value="Uitloggen"
+							type="button"
+							className="c-button"
+							onClick={setLogout}
+						/>
+					</main>
 				</>
 			);
 		}
-	} else {
-		return (
-			<>
-				<Head>
-					<title>Mijn account- ByViChi</title>
-				</Head>
-				<Header />
-				<main className="c-container">
-					<img
-						className="c-img"
-						src="/svgs/undraw_web_shopping_dd4l.svg"
-						alt="Tekening van meisje met dozen en webshop"
-					/>
-					<ToggleButton
-						title="Registreren"
-						titleTwo="Inloggen"
-						pathOne="/profile/sign-up"
-						pathTwo="/profile/log-in"
-					></ToggleButton>
-					<p className="c-caption">
-						Houd uw verlanglijstje bij, volg uw bestellingen op en bestel
-						sneller door eenmalig uw gegevens in te vullen…{" "}
-					</p>
-				</main>
-			</>
-		);
 	}
+
+	return (
+		<>
+			<Head>
+				<title>Mijn account- ByViChi</title>
+			</Head>
+			<Header />
+			<main className="c-container">
+				<img
+					className="c-img"
+					src="/svgs/undraw_web_shopping_dd4l.svg"
+					alt="Tekening van meisje met dozen en webshop"
+				/>
+				<ToggleButton
+					title="Registreren"
+					titleTwo="Inloggen"
+					pathOne="/profile/sign-up"
+					pathTwo="/profile/log-in"
+				></ToggleButton>
+				<p className="c-caption">
+					Houd uw verlanglijstje bij, volg uw bestellingen op en bestel sneller
+					door eenmalig uw gegevens in te vullen…
+				</p>
+			</main>
+		</>
+	);
 }
 
 export async function getServerSideProps(context) {
@@ -120,8 +128,8 @@ export async function getServerSideProps(context) {
 	let role;
 	let orders;
 	let products;
+	let allOrders;
 	const decoded = jwt.decode(cookies(context).token);
-	console.log({ decoded });
 	if (decoded) {
 		role = decoded.role;
 		try {
@@ -138,16 +146,18 @@ export async function getServerSideProps(context) {
 				`http://localhost:63971/api/orders/${decoded.thisUserId}`
 			);
 			orders = await res.json();
+			const allRes = await fetch(`http://localhost:63971/api/orders`);
+			allOrders = await allRes.json();
 		} catch (error) {
 			console.log(error);
 			orders = null;
+			allOrders = null;
 		}
 		try {
 			const resP = await fetch(
 				`http://localhost:63875/api/products/${orders[0].orderProducts[0].productId}`
 			);
 			products = await resP.json();
-			console.log({ products });
 		} catch (error) {
 			console.log(error);
 			products = null;
@@ -156,6 +166,8 @@ export async function getServerSideProps(context) {
 		user = null;
 		role = null;
 		orders = null;
+		products = null;
+		allOrders = null;
 	}
 	return {
 		props: {
@@ -163,6 +175,7 @@ export async function getServerSideProps(context) {
 			role,
 			orders,
 			products,
+			allOrders,
 		},
 	};
 }
