@@ -3,7 +3,6 @@ import React from "react";
 import Header from "../../components/organisms/Header";
 
 import jwt from "jsonwebtoken";
-import { useRouter } from "next/router";
 import cookies from "next-cookies";
 
 export default function Confirmation({ products, cart, user, decoded }) {

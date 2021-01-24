@@ -10,9 +10,14 @@ import Header from "../../components/organisms/Header";
 import ToggleButton from "../../components/atoms/ToggleButton";
 import { Context } from "../../libs/context.js";
 import { setLogout } from "../../libs/middlewareUtils";
+import { useRouter } from "next/router";
 
 export default function Account({ orders, user, role, products, allOrders }) {
 	const [context, setContext] = useContext(Context);
+	const router = useRouter();
+	const addProduct = () => {
+		router.push("/admin/new-product");
+	};
 	if (context) {
 		if (role == "Customer" && orders && products) {
 			return (
@@ -82,6 +87,7 @@ export default function Account({ orders, user, role, products, allOrders }) {
 								value="Voeg toe"
 								type="button"
 								className="c-button-second"
+								onClick={addProduct}
 							/>
 						</div>
 						<input
