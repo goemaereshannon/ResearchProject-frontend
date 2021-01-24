@@ -7,6 +7,9 @@ import jwt from "jsonwebtoken";
 import cookies from "next-cookies";
 
 export default function NewProduct({ role }) {
+    const saveProduct = () => {
+
+    }
 	const uploadFile = async (e) => {
 		console.log(e);
 		const files = e.target.files;
@@ -23,6 +26,7 @@ export default function NewProduct({ role }) {
 		);
 		const file = await res.json();
 		setImgSource(file.secure_url);
+		setImagePreview("c-preview-img");
 	};
 	const [name, setName] = useState("");
 	const [brand, setBrand] = useState("");
@@ -30,6 +34,7 @@ export default function NewProduct({ role }) {
 	const [category, setCategory] = useState("");
 	const [subCategory, setSubCategory] = useState("");
 	const [price, setPrice] = useState("");
+	const [imagePreview, setImagePreview] = useState("c-preview-img-hidden");
 	const [imgSource, setImgSource] = useState("");
 	console.log(role);
 	if (role == "Admin") {
@@ -40,8 +45,13 @@ export default function NewProduct({ role }) {
 					<h1>Nieuw product</h1>
 					<div className="c-inputs">
 						<label htmlFor="img">Afbeelding(en)</label>
+						<img
+							src={imgSource}
+							alt="Upload preview"
+							className={imagePreview}
+						/>
 						<input
-							className="c-inputs-box"
+							className="c-inputs-file"
 							id="img"
 							type="file"
 							placeholder="Upload"
@@ -51,7 +61,6 @@ export default function NewProduct({ role }) {
 								uploadFile(e);
 							}}
 						/>
-						<img src={imgSource} alt="Upload preview" />
 					</div>
 					<div className="c-inputs">
 						<label htmlFor="name">Productnaam</label>
@@ -89,6 +98,24 @@ export default function NewProduct({ role }) {
 							}}
 						/>
 					</div>
+                    <div className="c-inputs">
+						<label htmlFor="price">Prijs</label>
+						<input
+							className="c-inputs-box"
+							id="price"
+							placeholder="50 "
+							value={price}
+							onChange={(e) => {
+								setPrice(e.target.value);
+							}}
+						/>
+					</div>
+                    <input
+					value="Opslaan"
+					onClick={saveProduct}
+					type="button"
+					className="c-button c-detail-button c-order-btn"
+				/>
 				</main>
 			</>
 		);

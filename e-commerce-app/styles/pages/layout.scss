@@ -81,6 +81,17 @@
 			box-shadow: 0px 3px 6px rgba(62, 116, 119, 0.15);
 		}
 	}
+	&-file {
+		background-color: var(--light-khaki);
+		border-radius: 0.75rem;
+		padding: 1rem;
+	}
+	&-area {
+		background-color: var(--xxx-light-grey);
+		border: none;
+		padding: 1rem;
+		border-radius: 1rem;
+	}
 }
 
 .c-redirect {
