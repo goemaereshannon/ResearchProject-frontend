@@ -154,6 +154,13 @@
 	}
 }
 
+@media screen and (min-width: 425px) {
+	.c-button {
+		margin-top: 3.5rem;
+		margin-left: 2rem;
+	}
+}
+
 @media screen and (min-width: 768px) {
 	.c-container {
 		padding: 1.5rem 6rem;
