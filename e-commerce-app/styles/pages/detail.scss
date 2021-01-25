@@ -53,6 +53,7 @@
 				margin-left: 8.75rem;
 				margin-right: 8.75rem;
 				margin-bottom: 2rem;
+				padding-top: 0;
 			}
 		}
 	}
@@ -109,6 +110,11 @@
 		}
 		&-img {
 			width: 19rem;
+			height: auto;
+			object-fit: cover;
+			vertical-align: bottom;
+			margin-bottom: 2rem;
+			border-radius: 0.75rem;
 		}
 
 		&-body {

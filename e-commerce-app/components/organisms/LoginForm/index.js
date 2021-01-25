@@ -1,13 +1,20 @@
 import { useForm } from "react-hook-form";
 import { Alert } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../../libs/context.js";
 
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+import Cookies from "js-cookie";
 
 export default function LoginForm() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [loginUnsuccesfull, setLoginUnsuccesfull] = useState("");
+
+	const [context, setContext] = useContext(Context);
+	const router = useRouter();
 	const user = {
 		email: "",
 		password: "",
@@ -71,7 +78,6 @@ export default function LoginForm() {
 					placeholder="john.doe@domain.be"
 					value={email}
 					onChange={(e) => {
-						setLoginUnsuccesfull("");
 						setEmail(e.target.value);
 					}}
 				/>
@@ -104,7 +110,6 @@ export default function LoginForm() {
 					placeholder="********"
 					value={password}
 					onChange={(e) => {
-						setLoginUnsuccesfull("");
 						setPassword(e.target.value);
 					}}
 				/>

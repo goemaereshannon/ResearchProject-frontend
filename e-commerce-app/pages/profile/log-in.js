@@ -1,19 +1,11 @@
-import { React, useState, useContext } from "react";
+import React from "react";
 
 import Link from "next/link";
 import Head from "next/head";
-import { useRouter } from "next/router";
 
-import Cookies from "js-cookie";
-
-import { Context } from "../../libs/context.js";
-import LoginForm from "../../components/organisms/LoginForm"
+import LoginForm from "../../components/organisms/LoginForm";
 
 export default function LogIn() {
-	const [context, setContext] = useContext(Context);
-	const router = useRouter();
-
-
 	return (
 		<>
 			<Head>
@@ -34,7 +26,7 @@ export default function LogIn() {
 				</header>
 				<main className="c-content">
 					<p className="c-discover-title c-title">Inloggen</p>
-					<LoginForm/>
+					<LoginForm />
 				</main>
 			</div>
 		</>

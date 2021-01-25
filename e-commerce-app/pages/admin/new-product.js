@@ -213,7 +213,7 @@ export default function NewProduct({ role }) {
 		return (
 			<>
 				<Header></Header>
-				<main className="c-main">
+				<main className="c-detail c-prodlist">
 					U heeft toegang tot de functies van deze pagina.{" "}
 				</main>
 			</>
