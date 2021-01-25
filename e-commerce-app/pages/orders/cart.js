@@ -1,11 +1,9 @@
 import React from "react";
 
 import Router from "next/router";
+import cookies from "next-cookies";
 
 import jwt from "jsonwebtoken";
-import { getAppCookies } from "../../libs/middlewareUtils";
-import cookie from "js-cookie";
-import cookies from "next-cookies";
 
 import Header from "../../components/organisms/Header";
 
@@ -73,11 +71,21 @@ export default function Cart({ products, cart }) {
 				</main>
 			</>
 		);
+	} else if (products.length == 0) {
+		return (
+			<>
+				<Header />
+				<main className="c-detail c-prodlist">
+					<h1>Winkelmandje</h1>
+					<p>Er zit nog niks in uw winkelmandje.</p>
+				</main>
+			</>
+		);
 	} else {
 		return (
 			<>
 				<Header />
-				<main className="c-detail">
+				<main className="c-detail c-prodlist">
 					<h1>Winkelmandje</h1>
 					<p>
 						U kunt enkel de inhoud van uw winkelmandje zien wanneer u bent
@@ -93,7 +101,6 @@ export async function getServerSideProps(context) {
 	let products;
 	let cart;
 	const decoded = jwt.decode(cookies(context).token);
-	console.log({ decoded });
 	try {
 		const res = await fetch(
 			`http://localhost:63875/api/cartitems/${decoded.thisUserId}`
