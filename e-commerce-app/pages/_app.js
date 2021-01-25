@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }) {
 		stored = localStorage.getItem("token");
 		setContext(stored);
 	}, []);
-	console.log(context);
 	return (
 		<>
 			<Context.Provider value={[context, setContext]}>

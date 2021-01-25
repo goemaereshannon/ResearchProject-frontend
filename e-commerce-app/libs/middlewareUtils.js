@@ -71,5 +71,6 @@ export function absoluteUrl(req, setLocalhost) {
 export function setLogout(e) {
 	e.preventDefault();
 	Cookies.remove("token");
-	Router.push("/");
+	localStorage.removeItem("token");
+	Router.push("/profile/account");
 }
