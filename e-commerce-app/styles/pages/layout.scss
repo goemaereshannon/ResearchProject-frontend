@@ -131,6 +131,7 @@
 .c-button {
 	background-color: var(--sea-green);
 	padding: 1rem;
+	width: 100%;
 	max-width: 19.5rem;
 	color: var(--white);
 	border: none;
@@ -157,7 +158,6 @@
 @media screen and (min-width: 425px) {
 	.c-button {
 		margin-top: 3.5rem;
-		margin-left: 2rem;
 	}
 }
 

@@ -36,6 +36,7 @@
 		&-col {
 			flex-grow: 1;
 			padding: 0.25rem;
+			cursor: pointer;
 
 			&:hover &-img {
 				opacity: 0.6;

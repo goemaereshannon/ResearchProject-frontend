@@ -12,13 +12,12 @@ export default function Confirmation({ products, cart, user, decoded }) {
 		};
 		fetch(`http://localhost:63875/api/cart/${cart.id}`, requestOptions)
 			.then(async (response) => {
-				const data = await response.json();
 				if (!response.ok) {
 					const error = (data && data.message) || response.status;
 					return Promise.reject(error);
 				} else {
 					console.log(data);
-					Router.push("/orders/cart");
+					Router.push("/profile/account");
 				}
 			})
 			.catch((error) => {

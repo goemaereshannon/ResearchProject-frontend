@@ -8,6 +8,27 @@ import jwt from "jsonwebtoken";
 import Header from "../../components/organisms/Header";
 
 export default function Cart({ products, cart }) {
+	const deleteFromCart = (productId) => {
+		const requestOptions = {
+			method: "DELETE",
+		};
+		fetch(
+			`http://localhost:63875/api/cart/${cart.id}/${productId}`,
+			requestOptions
+		)
+			.then(async (response) => {
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					console.log(data);
+					Router.push("/orders/cart");
+				}
+			})
+			.catch((error) => {
+				console.error("There was an error!", error);
+			});
+	};
 	const getDetail = (id) => {
 		const path = `/products/${id}`;
 		Router.push(path);
@@ -41,6 +62,15 @@ export default function Cart({ products, cart }) {
 									<p>{product.name}</p>
 									<p>€ {product.price.value}</p>
 								</div>
+
+								<p
+									className="c-prodlist-delete"
+									onClick={() => {
+										deleteFromCart(product.id);
+									}}
+								>
+									Verwijder
+								</p>
 							</div>
 						))}
 						<div className="c-prodlist-sum">

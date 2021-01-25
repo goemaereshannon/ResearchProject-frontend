@@ -14,17 +14,24 @@
 	}
 	&-info {
 		margin-left: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+	&-delete {
+		text-decoration: underline;
+		cursor: pointer;
 	}
 	&-sum {
 		background-color: var(--xxx-light-grey);
 		padding: 1rem 2rem;
 		margin-bottom: 1rem;
-		
+
 		&-row {
 			display: flex;
 			justify-content: space-between;
 		}
-		&-cap{
+		&-cap {
 			text-transform: capitalize;
 		}
 	}
