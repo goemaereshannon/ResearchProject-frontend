@@ -39,6 +39,15 @@
 		margin-bottom: 0;
 	}
 
+	&-msg {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+	}
+	&-msg-none {
+		display: none;
+	}
+
 	&-cat {
 		color: var(--sea-green);
 	}

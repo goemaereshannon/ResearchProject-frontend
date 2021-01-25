@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
-import Link from "next/link";
-import Head from "next/head";
-import Header from "../../components/organisms/Header";
-import { useRouter } from "next/router";
-import { Context } from "../../libs/context.js";
 
-const baseURL = process.env.BASE_URL_PROD;
+import { useRouter } from "next/router";
+
+import { Context } from "../../libs/context.js";
+import Header from "../../components/organisms/Header";
 
 export default function Details({ product }) {
 	const [context, setContext] = useContext(Context);
+	const [message, setMessage] = useState("c-detail-msg-none");
 	const router = useRouter();
 	const id = router.query.id;
 	console.log(id);
@@ -32,6 +31,7 @@ export default function Details({ product }) {
 					return Promise.reject(error);
 				} else {
 					console.log(data);
+					setMessage("c-detail-msg");
 				}
 			})
 			.catch((error) => {
@@ -72,7 +72,7 @@ export default function Details({ product }) {
 	};
 
 	return (
-		<>
+		<div>
 			<header className="c-detail-head-lg">
 				<Header />
 				<div className="c-head c-detail-head-lg-subnav">
@@ -174,9 +174,24 @@ export default function Details({ product }) {
 							addToCart(product.id);
 						}}
 					/>
+					<div className={message}>
+						<svg width="48" height="48" viewBox="0 0 48 48">
+							<g fill="#1c1c1c" stroke="#fff" strokeWidth="1">
+								<circle cx="24" cy="24" r="24" stroke="none" />
+								<circle cx="24" cy="24" r="23.5" fill="none" />
+							</g>
+							<path
+								id="interface"
+								d="M8.877,18.059a1.183,1.183,0,0,1-1.674,0L.52,11.376a1.775,1.775,0,0,1,0-2.51l.837-.837a1.775,1.775,0,0,1,2.511,0L8.04,12.2,19.314.926a1.775,1.775,0,0,1,2.511,0l.837.837a1.775,1.775,0,0,1,0,2.51Zm0,0"
+								transform="translate(12 14.594)"
+								fill="#fff"
+							/>
+						</svg>
+						Item toegevoegd aan winkelmandje.
+					</div>
 				</div>
 			</main>
-		</>
+		</div>
 	);
 }
 
