@@ -5,11 +5,67 @@ import Header from "../../components/organisms/Header";
 import jwt from "jsonwebtoken";
 
 import cookies from "next-cookies";
+import { useRouter } from "next/router";
 
 export default function NewProduct({ role }) {
-    const saveProduct = () => {
-
-    }
+	const router = useRouter();
+	const addProduct = (product) => {
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(product),
+		};
+		fetch("http://localhost:63875/api/product", requestOptions).then(
+			async (response) => {
+				const data = await response.json();
+				if (!response.ok) {
+					const error = (data && data.message) || response.status;
+					return Promise.reject(error);
+				} else {
+					router.push("/");
+				}
+			}
+		);
+	};
+	const saveProduct = () => {
+		if (name) {
+			if (brand) {
+				if (descr) {
+					if (imgSource) {
+						if (subCategory) {
+							if (category) {
+								if (price) {
+									product.name = name;
+									product.brand = brand;
+									product.description = descr;
+									product.imageUrl = imgSource;
+									product.subcategoryname = subCategory;
+									product.categoryname = category;
+									product.price.value = parseInt(price);
+									console.log(product);
+									addProduct(product);
+								} else {
+									console.log("Prijs is verplicht");
+								}
+							} else {
+								console.log("Categorie verplicht");
+							}
+						} else {
+							console.log("Subcategorie verplicht");
+						}
+					} else {
+						console.log("Afbeelding is verplicht");
+					}
+				} else {
+					console.log("Productbeschrijving is verplicht");
+				}
+			} else {
+				console.log("Merk is verplicht");
+			}
+		} else {
+			console.log("Productnaam is verplicht");
+		}
+	};
 	const uploadFile = async (e) => {
 		console.log(e);
 		const files = e.target.files;
@@ -36,6 +92,17 @@ export default function NewProduct({ role }) {
 	const [price, setPrice] = useState("");
 	const [imagePreview, setImagePreview] = useState("c-preview-img-hidden");
 	const [imgSource, setImgSource] = useState("");
+	const product = {
+		name: "",
+		brand: "",
+		description: "",
+		imageUrl: "",
+		subcategoryname: "",
+		categoryname: "",
+		price: {
+			value: 0,
+		},
+	};
 	console.log(role);
 	if (role == "Admin") {
 		return (
@@ -56,7 +123,6 @@ export default function NewProduct({ role }) {
 							type="file"
 							placeholder="Upload"
 							required
-							value={name}
 							onChange={(e) => {
 								uploadFile(e);
 							}}
@@ -87,6 +153,30 @@ export default function NewProduct({ role }) {
 						/>
 					</div>
 					<div className="c-inputs">
+						<label htmlFor="categorie">Categorie</label>
+						<input
+							className="c-inputs-box"
+							id="categorie"
+							placeholder="Loavies"
+							value={category}
+							onChange={(e) => {
+								setCategory(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="c-inputs">
+						<label htmlFor="subcat">Subcategorie</label>
+						<input
+							className="c-inputs-box"
+							id="subcat"
+							placeholder="Loavies"
+							value={subCategory}
+							onChange={(e) => {
+								setSubCategory(e.target.value);
+							}}
+						/>
+					</div>
+					<div className="c-inputs">
 						<label htmlFor="descr">Beschrijving</label>
 						<textarea
 							className="c-inputs-area"
@@ -98,7 +188,7 @@ export default function NewProduct({ role }) {
 							}}
 						/>
 					</div>
-                    <div className="c-inputs">
+					<div className="c-inputs">
 						<label htmlFor="price">Prijs</label>
 						<input
 							className="c-inputs-box"
@@ -110,12 +200,12 @@ export default function NewProduct({ role }) {
 							}}
 						/>
 					</div>
-                    <input
-					value="Opslaan"
-					onClick={saveProduct}
-					type="button"
-					className="c-button c-detail-button c-order-btn"
-				/>
+					<input
+						value="Opslaan"
+						onClick={saveProduct}
+						type="button"
+						className="c-button c-detail-button c-order-btn"
+					/>
 				</main>
 			</>
 		);
