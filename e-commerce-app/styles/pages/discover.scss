@@ -1,72 +1,79 @@
 .c-discover {
-  margin: 2rem;
-  &-title {
-    font-family: $second-font;
-    margin: 0.25rem;
-    padding: 0;
-  }
-  &-price {
-    font-weight: bold;
-    margin-top: 0;
-    padding-top: 0;
-  }
-  &-more {
-    text-decoration: underline;
-    text-align: right;
-  }
+	margin: 2rem;
+	&-title {
+		font-family: $second-font;
+		margin: 0.25rem;
+		padding: 0;
+	}
+	&-price {
+		font-weight: bold;
+		margin-top: 0;
+		padding-top: 0;
+	}
+	&-more {
+		text-decoration: underline;
+		text-align: right;
+	}
 
-  &-insta {
-    display: flex;
-    flex-wrap: wrap;
-    &-photo {
-      width: 12rem;
-      height: 12rem;
-      border-radius: 0.25rem;
-      object-fit: cover;
-      & + &-photo {
-        padding-right: 1rem;
-      }
-    }
-  }
+	&-insta {
+		display: flex;
+		flex-wrap: wrap;
+		&-photo {
+			width: 12rem;
+			height: 12rem;
+			border-radius: 0.25rem;
+			object-fit: cover;
+			& + &-photo {
+				padding-right: 1rem;
+			}
+		}
+	}
 
-  &-photos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    &-col {
-      flex-grow: 1;
-      padding: 0.25rem;
+	&-photos {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		&-col {
+			flex-grow: 1;
+			padding: 0.25rem;
+			cursor: pointer;
 
-      &:hover &-img {
-        opacity: 0.6;
-      }
-    }
-    &-img {
-      max-width: 9rem;
-      max-height: 16rem;
-      border-radius: 1.33rem;
-    }
-    &-col &-img {
-      padding: 0.25rem;
-      min-width: 100%;
-      object-fit: cover;
-      vertical-align: bottom;
-    }
-  }
+			&:hover &-img {
+				opacity: 0.6;
+			}
+		}
+		&-img {
+			max-width: 9rem;
+			max-height: 16rem;
+			border-radius: 1.33rem;
+		}
+		&-col &-img {
+			padding: 0.25rem;
+			min-width: 100%;
+			object-fit: cover;
+			vertical-align: bottom;
+		}
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.c-discover-photos-img {
+		max-height: fit-content;
+	}
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 @media screen and (max-width: 800px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
+	.column {
+		flex: 50%;
+		max-width: 50%;
+	}
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
+	.column {
+		flex: 100%;
+		max-width: 100%;
+	}
 }

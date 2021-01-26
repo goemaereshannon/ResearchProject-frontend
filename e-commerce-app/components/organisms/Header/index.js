@@ -71,7 +71,7 @@ export default function Header({ children, activeClassName, ...props }) {
           </li>
         </ul>
       </div>
-      <Searchbar></Searchbar>
+      {/* <Searchbar></Searchbar> */}
       <Navigation></Navigation>
     </header>
   );
