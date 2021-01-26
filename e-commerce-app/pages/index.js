@@ -1,7 +1,5 @@
 import Head from "next/head";
-import React, { useContext } from "react";
-import { Context } from "../libs/context.js";
-import { testData } from "../public/test/testProducts";
+import React from "react";
 // import Instagram from 'instagram-web-api';
 import Header from "../components/organisms/Header";
 import ProductGrid from "../components/organisms/ProductGrid";
@@ -40,10 +38,8 @@ export async function getStaticProps() {
 	// const res = await fetch(`https://.../data`)
 	// const data = await res.json()
 
-	const eightImgs = testData;
 	return {
 		props: {
-			eightImgs,
 			// posts: response.user.edge_owner_to_timeline_media.edges,
 			products,
 			// context,

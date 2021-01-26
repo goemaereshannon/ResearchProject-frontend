@@ -3,7 +3,9 @@ import React from "react";
 import Header from "../../components/organisms/Header";
 
 import jwt from "jsonwebtoken";
+
 import cookies from "next-cookies";
+import Router from "next/router";
 
 export default function Confirmation({ products, cart, user, decoded }) {
 	const deleteItemsInCart = () => {
@@ -16,8 +18,7 @@ export default function Confirmation({ products, cart, user, decoded }) {
 					const error = (data && data.message) || response.status;
 					return Promise.reject(error);
 				} else {
-					console.log(data);
-					Router.push("/profile/account");
+					Router.push("/orders/orders");
 				}
 			})
 			.catch((error) => {
@@ -35,12 +36,10 @@ export default function Confirmation({ products, cart, user, decoded }) {
 			requestOptions
 		)
 			.then(async (response) => {
-				const data = await response.json();
 				if (!response.ok) {
 					const error = (data && data.message) || response.status;
 					return Promise.reject(error);
 				} else {
-					console.log(data);
 					deleteItemsInCart();
 				}
 			})

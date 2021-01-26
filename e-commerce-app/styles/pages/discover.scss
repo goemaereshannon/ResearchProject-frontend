@@ -56,8 +56,10 @@
 	}
 }
 
-.c-popup.bg {
-	opacity: 0.2;
+@media screen and (min-width: 800px) {
+	.c-discover-photos-img {
+		max-height: fit-content;
+	}
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */

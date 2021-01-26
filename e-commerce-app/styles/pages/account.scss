@@ -1,11 +1,19 @@
 .c-order-sum {
 	display: flex;
+	flex-direction: column;
+
 	&-body {
 		margin-left: 1rem;
 	}
+}
+.c-order-full {
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+	border-bottom: 1px solid var(--light-khaki);
 }
 
 .c-more {
 	text-align: right;
 	text-decoration: underline;
-}
+	cursor: pointer;
+} 

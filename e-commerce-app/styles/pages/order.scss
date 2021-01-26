@@ -10,4 +10,10 @@
 		margin-top: 2rem;
 		margin-bottom: 2rem;
 	}
+	&-sum {
+		&-c {
+			display: flex;
+			flex-direction: row;
+		}
+	}
 }

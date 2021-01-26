@@ -129,7 +129,7 @@ export default function LoginForm() {
 			</p>
 			<button type="submit" className="c-button">
 				Log in
-			</button>{" "}
+			</button>
 			<p className="error">{loginUnsuccesfull}</p>
 		</form>
 	);

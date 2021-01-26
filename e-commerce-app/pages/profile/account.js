@@ -1,7 +1,7 @@
 import Head from "next/head";
 import cookies from "next-cookies";
 
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import jwt from "jsonwebtoken";
 import moment from "moment";
@@ -13,13 +13,18 @@ import { setLogout } from "../../libs/middlewareUtils";
 import { useRouter } from "next/router";
 
 export default function Account({ orders, user, role, products, allOrders }) {
+	const showOrders = () => {
+		router.push("/orders/orders");
+	};
+	console.log(orders);
 	const [context, setContext] = useContext(Context);
 	const router = useRouter();
 	const addProduct = () => {
 		router.push("/admin/new-product");
 	};
 	if (context) {
-		if (role == "Customer" && orders && products) {
+		console.log({ context });
+		if (orders && orders.length == 0 && allOrders == 0) {
 			return (
 				<>
 					<Head>
@@ -31,22 +36,8 @@ export default function Account({ orders, user, role, products, allOrders }) {
 						<div>
 							<h2>Recente bestellingen</h2>
 							<div className="c-prodlist-sum c-order-sum">
-								<img src={products.imageUrl} className="c-prodlist-img" />
-								<div className="c-order-sum-body">
-									Geplaatst:
-									{moment(orders[0].placementDate).format("DD-mm-yyyy")}
-									<br />
-									Verzonden:{" "}
-									{moment(orders[0].shippingDate).format("DD-mm-yyyy")}
-									<br />
-									Items: {orders[0].orderProducts.length}
-									<br />
-									Totaal: €{orders[0].totalPrice}
-									<br />
-								</div>
+								Nog geen bestellingen
 							</div>
-
-							<p className="c-more">Toon alle</p>
 						</div>
 						<input
 							value="Uitloggen"
@@ -57,6 +48,53 @@ export default function Account({ orders, user, role, products, allOrders }) {
 					</main>
 				</>
 			);
+		} else if (role == "Customer" && orders && products) {
+			console.log(orders.length);
+			if (orders.length != 0) {
+				return (
+					<>
+						<Head>
+							<title>Mijn account- ByViChi</title>
+						</Head>
+						<Header />
+						<main className="c-discover">
+							<h1 className="c-prodlist-sum-cap">Dag {user.firstName}!</h1>
+							<div>
+								<h2>Recente bestellingen</h2>
+								<div className="c-prodlist-sum c-order-sum-c">
+									<img src={products.imageUrl} className="c-prodlist-img" />
+									<div className="c-order-sum-body">
+										Geplaatst:{" "}
+										{orders[0].placementDate.split("T")[0].split("-")[2]}-
+										{orders[0].placementDate.split("T")[0].split("-")[1]}-
+										{orders[0].placementDate.split("T")[0].split("-")[0]}
+										<br />
+										Verzonden:{" "}
+										{orders[0].shippingDate.split("T")[0].split("-")[2]}-
+										{orders[0].shippingDate.split("T")[0].split("-")[1]}-
+										{orders[0].shippingDate.split("T")[0].split("-")[0]}
+										<br />
+										Items: {orders[0].orderProducts.length}
+										<br />
+										Totaal: €{orders[0].totalPrice}
+										<br />
+									</div>
+								</div>
+
+								<p className="c-more" onClick={showOrders}>
+									Toon alle
+								</p>
+							</div>
+							<input
+								value="Uitloggen"
+								type="button"
+								className="c-button"
+								onClick={setLogout}
+							/>
+						</main>
+					</>
+				);
+			}
 		} else if (role == "Admin" && allOrders) {
 			return (
 				<>
@@ -79,7 +117,9 @@ export default function Account({ orders, user, role, products, allOrders }) {
 								</div>
 							</div>
 
-							<p className="c-more">Toon alle</p>
+							<p className="c-more" onClick={showOrders}>
+								Toon alle
+							</p>
 						</div>
 						<div>
 							<h2>Nieuw artikel toevoegen</h2>
